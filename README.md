@@ -27,7 +27,7 @@ This repository contains the code, dataset generation tools, and exploration log
 
 The Gazebo simulation environments used in this work are generated from HouseExpo floor plans.  
 Follow the instructions at:  
-👉 [houseexpo_based_custom_dataset_with_gazebo](https://github.com/f0120050/houseexpo_based_custom_dataset_with_gazebo)
+[houseexpo_based_custom_dataset_with_gazebo](https://github.com/f0120050/houseexpo_based_custom_dataset_with_gazebo)
 
 ### Step 2: Generate the Frontier-Centered Patch Dataset
 
