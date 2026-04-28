@@ -17,6 +17,7 @@ This repository contains the code, dataset generation tools, and exploration log
 | `integrated_code_for_map_completion.zip` | ROS integration: MapCompletionBatch service node (Python, hosts the U-Net model) |
 | `m-explore_20260312.zip` | Modified `explore_lite` ROS package with completion-aware frontier scoring |
 | `exploration_logs_20260315.zip` | Exploration run logs for all 8 HouseExpo environments (BASE and MC configurations, 3 runs each) |
+| `supplementary.pdf` | Supplementary material: qualitative model comparisons, UNet variant results, BDS results, and dataset split details |
 
 ---
 
