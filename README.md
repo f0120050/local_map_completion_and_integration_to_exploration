@@ -26,7 +26,7 @@ This repository contains the code, dataset generation tools, and exploration log
 
 The Gazebo simulation environments used in this work are generated from HouseExpo floor plans.  
 Follow the instructions at:  
-[houseexpo_based_custom_dataset_with_gazebo](https://github.com/f0120050/houseexpo_based_custom_dataset_with_gazebo)
+👉 [houseexpo_based_custom_dataset_with_gazebo](https://github.com/f0120050/houseexpo_based_custom_dataset_with_gazebo)
 
 ### Step 2: Generate the Frontier-Centered Patch Dataset
 
@@ -126,16 +126,7 @@ Contains timestamped CSV logs for all 8 HouseExpo evaluation environments across
 
 ## Citation
 
-If you use this code or data in your research, please cite:
-
-```
-@article{guzel2025frontier,
-  author  = {G{\"u}zel, Selma and Uslu, Erkan},
-  title   = {Frontier-Centered Local Map Completion for Autonomous Exploration},
-  journal = {Intelligent Service Robotics},
-  year    = {2025}
-}
-```
+Citation will be added upon publication.
 
 ---
 
