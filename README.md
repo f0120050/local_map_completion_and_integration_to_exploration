@@ -118,6 +118,36 @@ Contains timestamped CSV logs for all 8 HouseExpo evaluation environments across
 
 ---
 
+## Model Checkpoints and Metric Results
+
+Pre-trained model checkpoints and evaluation metric results for all models are available via Google Drive:
+
+- **Model Checkpoints and Metric Results**: [Google Drive](https://drive.google.com/drive/folders/1YEGeQQo2xxwP3Ltl-r_w7oUQwkD8cWol?usp=drive_link)
+
+> **Note:** These links will be migrated to a permanent repository (Zenodo) upon publication.
+
+---
+
+## Dataset
+
+The frontier-centered patch datasets are constructed from the [HouseExpo](https://github.com/TeaganLi/HouseExpo) indoor floor plan dataset:
+
+> T. Li et al., "HouseExpo: A large-scale 2D indoor layout dataset for learning-based algorithms on mobile robots," in *Proc. IEEE/RSJ Int. Conf. Intell. Robot. Syst. (IROS)*, 2020, pp. 5839–5846.
+
+| Dataset | Description | Link |
+|---------|-------------|------|
+| `dataset_patches` | Main frontier-centered 32×32 patch dataset (SDS/BDS) | [Google Drive](https://drive.google.com/file/d/1rV2ugK4UFYJP9R7uqv4WzI-5I_keTrD5/view?usp=drive_link) |
+| `dataset_patches_64` | 64×64 patch dataset (ablation) | [Google Drive](https://drive.google.com/file/d/18io9o68RZAzHbRWMLi9sOX0H9SZZkPqB/view?usp=drive_link) |
+| `dataset_patches_full` | Full patch pool including original 1,160-patch test set | [Google Drive](https://drive.google.com/file/d/1kuCWd1IrBpl13LxG6Ez3jB7UlpmzxQD3/view?usp=drive_link) |
+
+> **Note:** These links will be migrated to a permanent repository (Zenodo) upon publication.
+
+If any links are unavailable, please contact the corresponding author:
+- selma.guzel@std.yildiz.edu.tr
+- selmaguzelben@gmail.com
+
+---
+
 ## Related Repositories
 
 - [houseexpo_based_custom_dataset_with_gazebo](https://github.com/f0120050/houseexpo_based_custom_dataset_with_gazebo) — Gazebo environment generation from HouseExpo floor plans
