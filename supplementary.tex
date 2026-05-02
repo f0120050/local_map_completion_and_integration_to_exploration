@@ -1,0 +1,156 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{geometry}
+\usepackage{array}
+\geometry{margin=2.5cm}
+
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+
+\title{\textbf{Supplementary Material}\\[0.5em]
+\large Frontier-Centered Local Map Completion for Autonomous Exploration}
+\author{Selma G\"{u}zel \and Erkan Uslu}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+This document provides supplementary results referenced in the main paper,
+including qualitative model comparisons (Figs.~S1--S2), UNet variant
+evaluation (Table~S1), and dataset size sensitivity results (Table~S2).
+
+% ============================================================
+\section*{Dataset Split Details}
+% ============================================================
+
+The dataset was initially partitioned into train (81.4\%),
+validation (8.6\%), and test (10\%) sets at the environment
+level, yielding 9,418 train, 999 validation, and 1,160 test
+patches. To construct the larger dataset (BDS) without
+additional data collection, 1,000 patches were moved from
+the original test set into training, resulting in 10,418
+train patches. The remaining 160 test patches form the
+shared test set used for evaluation of both SDS and BDS
+configurations. The validation set is identical across
+both configurations.
+
+% ============================================================
+\section*{Qualitative Model Comparisons}
+% ============================================================
+
+Figures~\ref{fig:qualitative_1} and~\ref{fig:qualitative_2} show
+qualitative predictions of all evaluated models on the SDS test set.
+\texttt{UNet\textsubscript{base}} preserves thin walls and topological
+continuity most consistently. GAN variants (Pix2Pix-hinge, Seg-GAN)
+produce occasional hallucinations near obstacle boundaries. ViT
+generates fragmented wall predictions due to coarse $16\times16$ patch
+tokenisation. CVAE fails to capture structural patterns under irregular
+frontier masks. LSTM and ImageGPT produce near-uniform or structurally
+incoherent outputs.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{frontier_qualitative_all_models_1.pdf}
+    \caption{Qualitative comparison of frontier-centered completion
+    models on SDS. Columns left to right: input condition, ViT, UNet,
+    Pix2Pix, GEOM, CVAE, blended (known cells from input, predicted
+    cells from model), target.}
+    \label{fig:qualitative_1}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{frontier_qualitative_all_models_2.pdf}
+    \caption{Qualitative comparison of frontier-centered completion
+    models on SDS. Columns left to right: input condition, SegGAN,
+    LSTM, ImageGPT, blended (known cells from input, predicted cells
+    from model), target.}
+    \label{fig:qualitative_2}
+\end{figure}
+
+\clearpage
+
+% ============================================================
+\section*{Table S1: UNet Variant Comparison (MASKED, SDS)}
+% ============================================================
+
+Table~\ref{tab:unet_variants} reports MASKED evaluation results for
+all U-Net architectural variants on SDS. Since IoU and F1 differences
+are small (IoU range: 0.316--0.334), model selection is based on the
+average of all metrics (Pixel Acc, F1, IoU, L1, normalised throughput).
+\texttt{UNet\textsubscript{base}} achieves the highest overall average
+(0.627), driven by its superior Pixel Accuracy (0.649) and L1 (0.192),
+despite slightly lower IoU than deeper variants. LaMa, while a
+Fourier-augmented U-Net variant, is excluded from online deployment
+due to its throughput (12.67~img/s).
+
+\begin{table}[!ht]
+\renewcommand{\arraystretch}{1.3}
+\caption{UNet Variant Comparison: MASKED Evaluation on SDS.
+Selection criterion: normalised average of all metrics (Pixel Acc, F1, IoU,
+L1, normalised throughput). $\dagger$ = excluded (throughput $<$ 20~img/s).}
+\label{tab:unet_variants}
+\centering
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Model} & \textbf{Pixel Acc}$\uparrow$
+    & \textbf{F1-mac}$\uparrow$
+    & \textbf{IoU-mac}$\uparrow$
+    & \textbf{L1}$\downarrow$
+    & \textbf{img/s}$\uparrow$
+    & \textbf{Avg}$\uparrow$ \\
+\midrule
+\textbf{UNet\textsubscript{base}} & \textbf{0.649} & 0.412 & 0.316 & \textbf{0.192} & 42.25 & \textbf{0.627} \\
+UNet\textsubscript{new}           & 0.589 & 0.436 & 0.329 & 0.231 & \textbf{44.47} & 0.625 \\
+UNet\textsubscript{att}           & 0.587 & \textbf{0.441} & 0.333 & 0.228 & 39.33 & 0.603 \\
+UNet\textsubscript{4L}            & 0.562 & \textbf{0.441} & \textbf{0.334} & 0.237 & 43.63 & 0.616 \\
+LaMa$^\dagger$                    & 0.541 & 0.428 & 0.318 & 0.250 & 12.67 & 0.464 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\clearpage
+
+% ============================================================
+\section*{Table S2: Effect of Dataset Size (SDS $\rightarrow$ BDS)}
+% ============================================================
+
+Table~\ref{tab:masked_bds} reports MASKED results when models are
+retrained on the larger dataset (BDS: 10,418 training patches vs.\
+SDS: 9,418). \texttt{UNet\textsubscript{base}} performance remains
+nearly unchanged (IoU 0.309 vs.\ 0.316 on SDS), confirming the
+geometry-dominant nature of frontier-centered completion. GAN variants
+benefit modestly; ViT improves but remains below U-Net. This
+stability may not hold for substantially larger datasets, where
+data-hungry architectures such as ViT could potentially close the gap.
+GEOM is omitted as it produces near-zero MASKED scores on SDS.
+
+\begin{table}[!ht]
+\renewcommand{\arraystretch}{1.3}
+\caption{MASKED Evaluation on BDS. U-Net performance is stable
+across dataset sizes; other families benefit more from additional data.}
+\label{tab:masked_bds}
+\centering
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{Pixel Acc}$\uparrow$
+    & \textbf{F1-mac}$\uparrow$
+    & \textbf{IoU-mac}$\uparrow$
+    & \textbf{L1}$\downarrow$ \\
+\midrule
+\textbf{UNet\textsubscript{base}} & \textbf{0.619} & \textbf{0.409} & \textbf{0.309} & \textbf{0.206} \\
+Pix2Pix-hinge                     & 0.613 & 0.384 & 0.289 & 0.223 \\
+ViT                               & 0.570 & 0.323 & 0.242 & 0.236 \\
+CVAE                              & 0.404 & 0.267 & 0.180 & 0.317 \\
+RePaint                           & 0.102 & 0.094 & 0.051 & 0.591 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}
