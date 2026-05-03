@@ -151,7 +151,6 @@ python3 compute_env_metrics.py path/to/map.pgm
 | Free area (m²) | Navigable area = n\_free × (0.1 m)² |
 | Narrow-corridor (%) | Free space lost after 5-pixel morphological erosion (radius = 5 px = 0.5 m) |
 | Wall density (%) | Obstacles / (free + obstacles) |
-| Unknown fraction (%) | Unknown pixels / total pixels |
 | Openness (%) | 100 − narrow-corridor ratio |
 
 **Difficulty tier assignment (four-rule heuristic):**
